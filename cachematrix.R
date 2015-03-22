@@ -21,13 +21,13 @@ makeCacheMatrix <- function(x = matrix()) {
   ## get inverse of the matrix
   getinverse <- function() inv_matix
   ## set/get "matrix is not invertible"
-  set_invertable <- function() isnotinversible <<- TRUE
-  get_invertable <- function() isnotinversible
+  set_invertible <- function() isnotinversible <<- TRUE
+  get_invertible <- function() isnotinversible
   list(set = set, get = get,
        setinverse = setinverse,
        getinverse = getinverse,
-       set_invertable = set_invertable,
-       get_invertable = get_invertable)
+       set_invertible = set_invertible,
+       get_invertible = get_invertible)
 }
 
 
@@ -40,7 +40,7 @@ cacheSolve <- function(x, ...) {
     return(inv_matix)
   }
   ## try to check that matrix is not invertible
-  is_invertible <- x$get_invertable()
+  is_invertible <- x$get_invertible()
   if(!is.null(is_invertible)) {
     message("getting cached data")
     stop("The matrix is not invertible.")
@@ -49,7 +49,7 @@ cacheSolve <- function(x, ...) {
   nr_count <- nrow(data)
   ## is matrix not invertible?
   if (nr_count != ncol(data) || det(data) == 0) {
-    x$set_invertable()
+    x$set_invertible()
     stop("The matrix is not invertible.")
   }
   diagonal_matrix <- diag(1, nr_count)
